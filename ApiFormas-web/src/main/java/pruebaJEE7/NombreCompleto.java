@@ -3,7 +3,7 @@ package pruebaJEE7;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement(name = "nombres")
+@XmlRootElement
 public class NombreCompleto {
 
     public String nombre;

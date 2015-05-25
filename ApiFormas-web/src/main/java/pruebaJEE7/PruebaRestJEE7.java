@@ -2,7 +2,10 @@ package pruebaJEE7;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -40,5 +43,23 @@ public class PruebaRestJEE7 {
         lista.add(new NombreCompleto("Ariél", "Alvarado"));
         lista.add(new NombreCompleto("Nombre", "ApellidóÁ"));
         return lista;
+    }
+
+    @POST
+    @Path("saluda5")
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @ServerLogged
+    public String saluda5(@FormParam("nombrepar") String nombre, @FormParam("apellidopar") String apellido) {
+        return "Hola " + nombre + " " + apellido;
+    }
+
+    @POST
+    @Path("saluda6")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
+    @ServerLogged
+    public String saluda6(NombreCompleto fullName) {
+        return "Hola " + fullName.nombre + " " + fullName.apellido;
     }
 }

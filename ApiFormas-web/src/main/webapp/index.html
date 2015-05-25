@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Start Page</title>
+        <title>Página de Inicio</title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     </head>
     <body>
-        <h1>Hello World!</h1>
+        <h1>Página de Inicio</h1>
+        <h3>Favor ingresar nombre y apellido</h3>
+        <form action="jee/resturl/saluda6"  method="POST" >
+            <label for="nombre">Nombre: </label><input type="text" name="nombrepar"/><br />
+            <label for="apellido">Apellido: </label><input type="text" name="apellidopar"/> <br />
+            <input type="submit">
+        </form>
     </body>
 </html>
