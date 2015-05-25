@@ -1,7 +1,12 @@
 package pruebaJEE7;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+import javax.validation.ConstraintViolation;
+import javax.validation.Valid;
+import javax.validation.Validation;
+import javax.validation.Validator;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -59,7 +64,11 @@ public class PruebaRestJEE7 {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @ServerLogged
-    public String saluda6(NombreCompleto fullName) {
+    public String saluda6(NombreCompleto fullName) throws CustomizedRestException {
+        if (!fullName.nombre.equals("Ariel")){
+            throw new CustomizedRestException("Error raro [PruebaRestJEE7][saluda6]");
+        }
         return "Hola " + fullName.nombre + " " + fullName.apellido;
+
     }
 }
