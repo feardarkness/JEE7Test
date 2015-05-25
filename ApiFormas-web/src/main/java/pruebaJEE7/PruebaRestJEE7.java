@@ -1,12 +1,14 @@
 package pruebaJEE7;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
 import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
@@ -65,8 +67,16 @@ public class PruebaRestJEE7 {
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @ServerLogged
     public String saluda6(NombreCompleto fullName) throws CustomizedRestException {
-        if (!fullName.nombre.equals("Ariel")){
-            throw new CustomizedRestException("Error raro [PruebaRestJEE7][saluda6]");
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<NombreCompleto>> errores = validator.validate(fullName);        
+        if (!errores.isEmpty()){
+            Iterator<ConstraintViolation<NombreCompleto>> iterador = errores.iterator();
+            StringBuilder mensajeError = new StringBuilder();
+            while(iterador.hasNext()){
+                mensajeError.append(iterador.next().getMessage());
+            }
+            throw new CustomizedRestException(mensajeError.toString());
         }
         return "Hola " + fullName.nombre + " " + fullName.apellido;
 
