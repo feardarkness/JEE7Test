@@ -1,4 +1,4 @@
-package pruebaJEE7;
+package pruebaJEE7Rest;
 
 import java.io.IOException;
 import java.io.PrintWriter;

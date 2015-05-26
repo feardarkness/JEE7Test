@@ -1,4 +1,4 @@
-package pruebaJEE7;
+package pruebaJEE7Rest;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;

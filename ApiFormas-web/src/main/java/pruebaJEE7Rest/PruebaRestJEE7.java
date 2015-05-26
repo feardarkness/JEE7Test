@@ -1,4 +1,4 @@
-package pruebaJEE7;
+package pruebaJEE7Rest;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -42,7 +42,7 @@ public class PruebaRestJEE7 {
     }
 
     @GET
-    @Path("saludo4")
+    @Path("saludo4")    
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @ServerLogged
     public ArrayList<NombreCompleto> saludaLista() {
@@ -79,6 +79,6 @@ public class PruebaRestJEE7 {
             throw new CustomizedRestException(mensajeError.toString());
         }
         return "Hola " + fullName.nombre + " " + fullName.apellido;
-
     }
+    
 }

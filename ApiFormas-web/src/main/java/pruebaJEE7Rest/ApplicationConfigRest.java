@@ -1,4 +1,4 @@
-package pruebaJEE7;
+package pruebaJEE7Rest;
 
 import java.util.HashSet;
 import java.util.Set;

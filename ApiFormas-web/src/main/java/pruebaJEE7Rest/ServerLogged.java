@@ -1,4 +1,4 @@
-package pruebaJEE7;
+package pruebaJEE7Rest;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
