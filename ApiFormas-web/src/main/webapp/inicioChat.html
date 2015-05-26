@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<!--
+ * Copyright (C) 2015 FearDarkness
+ *
+ *    Licensed under the Apache License, Version 2.0 (the "License");
+ *    you may not use this file except in compliance with the License.
+ *    You may obtain a copy of the License at
+ *
+ *        http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *    Unless required by applicable law or agreed to in writing, software
+ *    distributed under the License is distributed on an "AS IS" BASIS,
+ *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or    implied.
+ *    See the License for the specific language governing permissions and
+ *    limitations under the License.
+-->
+<html>
+    <head>
+        <title>Chat websockets y HTML 5</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css">        
+        <link rel="stylesheet" href="css/estilos-propios.css">        
+    </head>
+    <body lang="en">         
+        <div class="row">
+            <div class="col-md-12"><h1>Chat de Prueba con WebSockets <small>Servidor en Glassfish (JEE7)</small></h1></div>
+        </div>        
+        <div class="row">
+            <div class="col-md-9">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Chat</div>
+                    <div class="panel-body" id="chat">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" >
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Conectados</div>
+                    <div class="panel-body" id="conectados">
+                        yyuyutytyuutr<br>
+                        ytutytyyutyt<br>
+                        yuruyuyuyuyuytytuyuyuy<br>
+                    </div>                        
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-10"><input type="text" id ="mensaje" name="mensaje" class="form-control" placeholder="Escribe tu mensaje" /></div>                
+            <div class="col-md-2"><input id ="enviar" type="submit" name="enviar" class="btn btn-success" value="Enviar"/></div>                
+        </div>
+        <script src="js/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>        
+        <script src="js/websocket.js"></script>        
+    </body>
+</html>
