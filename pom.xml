@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>bo.gob.mineco</groupId>
-  <artifactId>ApiFormas</artifactId>
+  <artifactId>JEE7Varios</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>pom</packaging>
-  <name>ApiFormas</name>
+  <name>JEE7Varios</name>
   <modules>
-    <module>ApiFormas-ear</module>
-    <module>ApiFormas-web</module>
-    <module>ApiFormas-ejb</module>
+    <module>JEE7Varios-ear</module>
+    <module>JEE7Varios-web</module>
+    <module>JEE7Varios-ejb</module>
   </modules>
 </project>

@@ -2,10 +2,8 @@ package pruebaJEE7Rest;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
 import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -42,7 +40,7 @@ public class PruebaRestJEE7 {
     }
 
     @GET
-    @Path("saludo4")    
+    @Path("saludo4")
     @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
     @ServerLogged
     public ArrayList<NombreCompleto> saludaLista() {
@@ -69,16 +67,16 @@ public class PruebaRestJEE7 {
     public String saluda6(NombreCompleto fullName) throws CustomizedRestException {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
-        Set<ConstraintViolation<NombreCompleto>> errores = validator.validate(fullName);        
-        if (!errores.isEmpty()){
+        Set<ConstraintViolation<NombreCompleto>> errores = validator.validate(fullName);
+        if (!errores.isEmpty()) {
             Iterator<ConstraintViolation<NombreCompleto>> iterador = errores.iterator();
             StringBuilder mensajeError = new StringBuilder();
-            while(iterador.hasNext()){
+            while (iterador.hasNext()) {
                 mensajeError.append(iterador.next().getMessage());
             }
             throw new CustomizedRestException(mensajeError.toString());
         }
         return "Hola " + fullName.nombre + " " + fullName.apellido;
     }
-    
+
 }

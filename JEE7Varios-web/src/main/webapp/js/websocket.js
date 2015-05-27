@@ -15,8 +15,9 @@
  */
 
 $(document).ready(function () {
+    console.log(window.location.href);
     var usuario = "Ariel";
-    var webSocketChat = new WebSocket("ws://localhost:8080/ApiFormas-web/webSocketChat");
+    var webSocketChat = new WebSocket("ws://"+window.location.host+"/JEE7Varios-web/webSocketChat");
     // cuando ha ocurrido un error
     webSocketChat.addEventListener("error", function (event) {
         alert("ups, un error terrible" + event);
