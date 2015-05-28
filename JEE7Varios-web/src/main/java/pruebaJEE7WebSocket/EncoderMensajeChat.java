@@ -15,7 +15,7 @@
  */
 package pruebaJEE7WebSocket;
 
-import com.sun.istack.internal.logging.Logger;
+import java.util.logging.Logger;
 import javax.json.Json;
 import javax.json.JsonObject;
 import javax.websocket.EncodeException;
@@ -24,7 +24,7 @@ import javax.websocket.EndpointConfig;
 
 public class EncoderMensajeChat implements Encoder.Text<MensajeChat> {
 
-    private static Logger log = Logger.getLogger(EncoderMensajeChat.class);
+    private static Logger log = Logger.getLogger(EncoderMensajeChat.class.getName());
 
     @Override
     public String encode(MensajeChat mensajeChat) throws EncodeException {

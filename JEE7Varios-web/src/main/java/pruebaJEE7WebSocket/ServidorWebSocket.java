@@ -15,8 +15,10 @@
  */
 package pruebaJEE7WebSocket;
 
-import com.sun.istack.internal.logging.Logger;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.websocket.CloseReason;
 import javax.websocket.EndpointConfig;
 import javax.websocket.OnClose;
@@ -29,31 +31,31 @@ import javax.websocket.server.ServerEndpoint;
 @ServerEndpoint(value = "/webSocketChat", decoders = DecoderMensajeChat.class, encoders = EncoderMensajeChat.class)
 public class ServidorWebSocket {
 
-    private static Logger log = Logger.getLogger(ServidorWebSocket.class);
+    private static final Logger log = Logger.getLogger(ServidorWebSocket.class.getName());
 
     @OnOpen
     public void socketAbierto(Session sesion, EndpointConfig endPointConfig) {
-        log.info("[ServidorWebSocket][SocketAbierto]Socket abierto" + sesion.getId() + ", " + sesion.getRequestURI());
+        log.log(Level.INFO, "[ServidorWebSocket][SocketAbierto]Socket abierto: {0}, {1}", new Object[]{sesion.getId(), sesion.getRequestURI()});
     }
 
     @OnError
     public void socketConError(Session sesion, Throwable error) {
-        log.severe("[ServidorWebSocket][SocketConError]Socket con error" + error.getStackTrace().toString());
+        log.log(Level.SEVERE, "[ServidorWebSocket][SocketConError]Socket con error: {0}", Arrays.toString(error.getStackTrace()));
     }
 
     @OnClose
     public void socketCerrado(Session sesion, CloseReason closeReason) {
-        log.info("[ServidorWebSocket][SocketCerrado]Socket cerrado" + closeReason.getReasonPhrase());
+        log.log(Level.INFO, "[ServidorWebSocket][SocketCerrado]Socket cerrado: {0}", closeReason.getReasonPhrase());
     }
 
     @OnMessage
-    public void mensajeRecibido(Session sesion, String mensaje) throws IOException {
-        log.info("[ServidorWebSocket][mensajeRecibido]Se ha recibido un mensaje" + mensaje);
-        for (Session s : sesion.getOpenSessions()) {
-            if (s.isOpen() && sesion.getId() != s.getId()) {
-                s.getBasicRemote().sendText(mensaje);
+    public void mensajeRecibido(Session sesionActual, String mensaje) throws IOException {
+        log.log(Level.INFO, "[ServidorWebSocket][mensajeRecibido]Se ha recibido un mensaje: {0}", mensaje);
+        for (Session sesion : sesionActual.getOpenSessions()) {
+            if (sesion.isOpen() && sesionActual.getId() != sesion.getId()) {
+                sesion.getBasicRemote().sendText(mensaje);
             }
         }
-        
+
     }
 }
