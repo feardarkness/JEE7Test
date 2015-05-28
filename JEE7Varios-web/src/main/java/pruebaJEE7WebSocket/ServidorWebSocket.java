@@ -15,6 +15,7 @@
  */
 package pruebaJEE7WebSocket;
 
+import com.sun.istack.internal.logging.Logger;
 import java.io.IOException;
 import javax.websocket.CloseReason;
 import javax.websocket.EndpointConfig;
@@ -25,38 +26,34 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
-@ServerEndpoint("/webSocketChat")
+@ServerEndpoint(value = "/webSocketChat", decoders = DecoderMensajeChat.class, encoders = EncoderMensajeChat.class)
 public class ServidorWebSocket {
+
+    private static Logger log = Logger.getLogger(ServidorWebSocket.class);
 
     @OnOpen
     public void socketAbierto(Session sesion, EndpointConfig endPointConfig) {
-        System.out.println("+++++++++++++++++++++++ Socket Abierto ++++++++++++++++++");
-        System.out.println(sesion.getRequestURI());
-        System.out.println("---------------------------------------------------------");
+        log.info("[ServidorWebSocket][SocketAbierto]Socket abierto" + sesion.getId() + ", " + sesion.getRequestURI());
     }
-    
+
     @OnError
     public void socketConError(Session sesion, Throwable error) {
-        System.out.println("+++++++++++++++++++++++ Socket con error ++++++++++++++++++");
-        System.out.println(sesion.getRequestURI());
-        System.out.println("---------------------------------------------------------");
+        log.severe("[ServidorWebSocket][SocketConError]Socket con error" + error.getStackTrace().toString());
     }
-    
+
     @OnClose
     public void socketCerrado(Session sesion, CloseReason closeReason) {
-        System.out.println("+++++++++++++++++++++++ Socket Cerrado ++++++++++++++++++");
-        System.out.println(sesion.getRequestURI());
-        System.out.println("---------------------------------------------------------");
+        log.info("[ServidorWebSocket][SocketCerrado]Socket cerrado" + closeReason.getReasonPhrase());
     }
 
     @OnMessage
     public void mensajeRecibido(Session sesion, String mensaje) throws IOException {
-        System.out.println("+++++++++++++++++++++++ Mensaje recibido en Socket ++++++++++++++++++");
+        log.info("[ServidorWebSocket][mensajeRecibido]Se ha recibido un mensaje" + mensaje);
         for (Session s : sesion.getOpenSessions()) {
             if (s.isOpen() && sesion.getId() != s.getId()) {
                 s.getBasicRemote().sendText(mensaje);
             }
         }
-        System.out.println("---------------------------------------------------------");
+        
     }
 }

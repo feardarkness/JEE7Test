@@ -43,7 +43,7 @@
     <dependencies>
         <dependency>
             <groupId>bo.gob.mineco</groupId>
-            <artifactId>ApiFormas-ejb</artifactId>
+            <artifactId>JEE7Varios-ejb</artifactId>
             <version>1.0-SNAPSHOT</version>
             <type>ejb</type>
         </dependency>
