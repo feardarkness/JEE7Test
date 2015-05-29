@@ -24,37 +24,41 @@
         <link rel="stylesheet" href="css/estilos-propios.css">        
     </head>
     <body lang="en">     
-        <form>
-            <div class="row">
-                <div class="col-md-12"><h1>Chat de Prueba con WebSockets <small>Servidor en Glassfish (JEE7)</small></h1></div>
-            </div>        
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">Chat</div>
-                        <div class="panel-body" id="contenedor-chat">
-                            <div id="chat">
+        <div class="container">
+            <form>
+                <div class="row">
+                    <div class="col-md-12"><h1>Chat de Prueba con WebSockets <small>Servidor en Glassfish (JEE7)</small></h1></div>
+                </div>        
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Chat</div>
+                            <div class="panel-body" id="contenedor-chat">
+                                <div id="chat">
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-3" >
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">Conectados</div>
-                        <div class="panel-body" id="conectados">
-                            yyuyutytyuutr<br>
-                            ytutytyyutyt<br>
-                            yuruyuyuyuyuytytuyuyuy<br>
-                        </div>                        
+                    <div class="col-md-3" >
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">Conectados</div>
+                            <div class="panel-body" id="conectados">
+                                yyuyutytyuutr<br>
+                                ytutytyyutyt<br>
+                                yuruyuyuyuyuytytuyuyuy<br>
+                            </div>                        
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-10"><input type="text" id ="mensaje" name="mensaje" class="form-control" placeholder="Escribe tu mensaje" /></div>                
-                <div class="col-md-2"><input id ="enviar" name="submit" type="submit" class="btn btn-success" /></div>                
-            </div>
-        </form>
+                <div class="row">
+                    <div class="col-md-2"><input type="text" id ="usuario" name="usuario" class="form-control" placeholder="Nombre de Usuario" /></div>
+                    <div class="col-md-8"><input type="text" id ="mensaje" name="mensaje" class="form-control" placeholder="Escribe tu mensaje" /></div>
+                    <div class="col-md-2"><input id ="enviar" name="submit" type="submit" class="btn btn-success" /></div>                
+                </div>
+            </form>
+        </div>
         <script src="js/jquery.min.js"></script>
+        <script src="js/emoticon.min.js"></script>
         <script src="js/bootstrap.min.js"></script>        
         <script src="js/moment.min.js"></script>        
         <script src="js/websocket.min.js"></script>        

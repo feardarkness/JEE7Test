@@ -30,7 +30,9 @@ import javax.websocket.server.ServerEndpoint;
 
 @ServerEndpoint(value = "/webSocketChat", decoders = DecoderMensajeChat.class, encoders = EncoderMensajeChat.class)
 public class ServidorWebSocket {
-
+    
+    // catalogo de proyectos
+    
     private static final Logger log = Logger.getLogger(ServidorWebSocket.class.getName());
 
     @OnOpen
