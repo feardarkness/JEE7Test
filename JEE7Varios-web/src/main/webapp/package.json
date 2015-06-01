@@ -1,0 +1,19 @@
+{
+  "name": "JEE7Test",
+  "version": "1.0.0",
+  "description": "Proyecto de Prueba JEE7 Chat",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/feardarkness/JEE7Test.git"
+  },
+  "author": "FearDarkness (alvarado.ariel.contact at gmail.com)",
+  "license": "Apache License 2.0",
+  "bugs": {
+    "url": "https://github.com/feardarkness/JEE7Test/issues"
+  },
+  "homepage": "https://github.com/feardarkness/JEE7Test"
+}
