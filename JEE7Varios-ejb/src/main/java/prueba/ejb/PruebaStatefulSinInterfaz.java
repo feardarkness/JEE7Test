@@ -13,25 +13,21 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
+
 package prueba.ejb;
 
-import javax.ejb.Stateless;
+import javax.ejb.Stateful;
 
-// Ojo, en JEE 7 no necesitamos interfaz para ejb locales, solamente para remotos
-@Stateless
-public class PruebaStatelessSinInterfaz {
-
-    // ojo un bean Stateless no debe declarar NUNCA una variable de instancia
-    // no es necesario darle un valor, pero de todas maneras por motivo del ejemplo
-    float numero = 0f;
-
-    public float sumarDiez() {
-        numero += 10;
+@Stateful 
+public class PruebaStatefulSinInterfaz {
+    private float numero = 0;
+    public float sumarTreinta() {
+        numero += 30;
         return numero;
     }
 
-    public float sumarVeinte() {
-        numero += 20;
+    public float sumarCuarenta() {
+        numero += 40;
         return numero;
     }
 }

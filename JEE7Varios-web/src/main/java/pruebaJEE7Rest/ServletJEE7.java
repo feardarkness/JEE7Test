@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import prueba.ejb.PruebaStatefulSinInterfaz;
 import prueba.ejb.PruebaStatelessSinInterfaz;
 
 /**
@@ -19,6 +20,9 @@ public class ServletJEE7 extends HttpServlet {
 
     @Inject
     PruebaStatelessSinInterfaz numero;
+    
+    @Inject
+    PruebaStatefulSinInterfaz numero1;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,11 +48,11 @@ public class ServletJEE7 extends HttpServlet {
                 out.println("<head>");
                 out.println("<title>Servlet ServletJEE7</title>");
                 out.println("</head>");
-                out.println("<body>");
-                out.println(numero);
+                out.println("<body>");                
                 out.println("<h1>Servlet ServletJEE7 at " + request.getContextPath() + "</h1>");
                 out.println("<p>Primer servlet jee7, bien hecho!!!</p>");
-                out.println("<p>El numero devuelto de la inyeccion de dependencias con inject es: " + numero+ "</p>");
+                out.println("<p>[stateless]El numero devuelto de la inyeccion de dependencias con inject es: " + numero+ "</p>");
+                out.println("<p>[stateful]El numero devuelto de la inyeccion de dependencias con inject es: " + numero1+ "</p>");
                 out.println("</body>");
                 out.println("</html>");
             }
