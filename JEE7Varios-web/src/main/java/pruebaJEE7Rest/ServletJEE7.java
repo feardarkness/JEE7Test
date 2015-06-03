@@ -2,11 +2,13 @@ package pruebaJEE7Rest;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import prueba.ejb.PruebaStatelessSinInterfaz;
 
 /**
  *
@@ -14,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ServletJEE7", urlPatterns = {"/servlet1"})
 public class ServletJEE7 extends HttpServlet {
+
+    @Inject
+    PruebaStatelessSinInterfaz numero;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -26,13 +31,12 @@ public class ServletJEE7 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
         response.setContentType("text/html;charset=UTF-8");
         String parametroRedireccion = request.getParameter("redireccion");
         if (parametroRedireccion != null && parametroRedireccion.equals("true")) {
             request.getRequestDispatcher("prueba2url").forward(request, response);
-            System.out.println("Se redirecciono (true)");
         } else {
-            System.out.println("No se redirecciono (false)");
             try (PrintWriter out = response.getWriter()) {
                 /* TODO output your page here. You may use following sample code. */
                 out.println("<!DOCTYPE html>");
@@ -41,13 +45,19 @@ public class ServletJEE7 extends HttpServlet {
                 out.println("<title>Servlet ServletJEE7</title>");
                 out.println("</head>");
                 out.println("<body>");
+                out.println(numero);
                 out.println("<h1>Servlet ServletJEE7 at " + request.getContextPath() + "</h1>");
                 out.println("<p>Primer servlet jee7, bien hecho!!!</p>");
+                out.println("<p>El numero devuelto de la inyeccion de dependencias con inject es: " + numero+ "</p>");
                 out.println("</body>");
                 out.println("</html>");
             }
         }
 
+    }
+
+    public void init() {
+        System.out.println("Entro a Init");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
