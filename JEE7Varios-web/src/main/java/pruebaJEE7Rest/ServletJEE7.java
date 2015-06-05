@@ -3,7 +3,9 @@ package pruebaJEE7Rest;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Inject;
+import javax.naming.InitialContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +20,10 @@ import prueba.ejb.PruebaStatelessSinInterfaz;
  */
 @WebServlet(name = "ServletJEE7", urlPatterns = {"/servlet1"})
 public class ServletJEE7 extends HttpServlet {
-
+/*
     @Inject
     PruebaStatelessSinInterfaz numero;
-
+*/
     @Inject
     PruebaStatefulSinInterfaz numero1;
 
@@ -29,6 +31,11 @@ public class ServletJEE7 extends HttpServlet {
     public void despuesDeInyectar() {
         System.out.println("[ServletJEE7][despuesDeInyectar] se llama al metodo despues de realizar la inyeccion de dependencias");
         numero1.setNumero(500);
+    }
+
+    @PreDestroy
+    private void cleanupResources() {
+        System.out.println("[ServletJEE7][cleanupResources] se llama al metodo cuando se esta por remover la instancia");
     }
 
     /**
@@ -42,8 +49,16 @@ public class ServletJEE7 extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        response.setContentType("text/html;charset=UTF-8");        
+        
+        PruebaStatelessSinInterfaz obj = null;
+        try {
+            InitialContext ic = new InitialContext();
+            obj = (PruebaStatelessSinInterfaz) ic.lookup("java:global/JEE7Varios-ear/JEE7Varios-ejb-1.0-SNAPSHOT/PruebaStatelessSinInterfaz");
+        } catch (Exception e) {
+            System.out.println("Error en la inyeccion de dependencias");
+        }
+        
+        response.setContentType("text/html;charset=UTF-8");
         String parametroRedireccion = request.getParameter("redireccion");
         if (parametroRedireccion != null && parametroRedireccion.equals("true")) {
             request.getRequestDispatcher("prueba2url").forward(request, response);
@@ -56,12 +71,11 @@ public class ServletJEE7 extends HttpServlet {
                 out.println("<title>Servlet ServletJEE7</title>");
                 out.println("</head>");
                 out.println("<body>");
-                out.println("-----------------" + request.getSession(true).getId());
-                request.changeSessionId();
                 out.println("<h1>Servlet ServletJEE7 at " + request.getContextPath() + "</h1>");
                 out.println("<p>Primer servlet jee7, bien hecho!!!</p>");
-                out.println("<p>[stateless]El numero devuelto de la inyeccion de dependencias con inject es: " + numero.sumarDiez() + "</p>");
-                out.println("<p>[stateful]El numero devuelto de la inyeccion de dependencias con inject es: " + numero1.sumarTreinta() + "</p>");
+                //out.println("<p>[stateless]El numero devuelto de la inyeccion de dependencias con inject es: " + numero.sumarDiez() + "</p>");
+                out.println("<p>[stateful]El numero devuelto de la inyeccion de dependencias con inject es: " + numero1.sumarTreinta() + "</p>");                
+                out.println("<p>[stateful]El numero devuelto del objeto con lookup es: " + obj.sumarDiez() + "</p>");
                 out.println("</body>");
                 out.println("</html>");
             }
@@ -70,7 +84,7 @@ public class ServletJEE7 extends HttpServlet {
     }
 
     public void init() {
-        System.out.println("Entro a Init");
+        System.out.println("Entro a Init del Servlet");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
