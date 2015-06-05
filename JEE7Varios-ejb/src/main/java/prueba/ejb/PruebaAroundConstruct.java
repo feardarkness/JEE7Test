@@ -15,27 +15,16 @@
  */
 package prueba.ejb;
 
-import javax.ejb.Stateful;
-import javax.interceptor.AroundConstruct;
-import javax.interceptor.Interceptors;
+import java.lang.annotation.ElementType;
+//import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import javax.interceptor.InterceptorBinding;
 
-@Stateful
-public class PruebaStatefulSinInterfaz {
-
-    private float numero = 0;
-    
-    @Interceptors({AroundConstructInterceptor.class})
-    public PruebaStatefulSinInterfaz() {
-        System.out.println("[PruebaStatefulSinInterfaz][PruebaStatefulSinInterfaz]Entra al constructor");
-    }
-
-    public float sumarTreinta() {
-        numero += 30;
-        return numero;
-    }
-
-    public float sumarCuarenta() {
-        numero += 40;
-        return numero;
-    }
+//@Inherited
+@InterceptorBinding
+@Retention(RetentionPolicy.RUNTIME)
+@Target({ElementType.CONSTRUCTOR, ElementType.METHOD, ElementType.TYPE})
+public @interface PruebaAroundConstruct {    
 }

@@ -51,8 +51,8 @@ public class ServletJEE7 extends HttpServlet {
                 out.println("<body>");                
                 out.println("<h1>Servlet ServletJEE7 at " + request.getContextPath() + "</h1>");
                 out.println("<p>Primer servlet jee7, bien hecho!!!</p>");
-                out.println("<p>[stateless]El numero devuelto de la inyeccion de dependencias con inject es: " + numero+ "</p>");
-                out.println("<p>[stateful]El numero devuelto de la inyeccion de dependencias con inject es: " + numero1+ "</p>");
+                out.println("<p>[stateless]El numero devuelto de la inyeccion de dependencias con inject es: " + numero.sumarDiez()+ "</p>");
+                out.println("<p>[stateful]El numero devuelto de la inyeccion de dependencias con inject es: " + numero1.sumarTreinta()+ "</p>");
                 out.println("</body>");
                 out.println("</html>");
             }
