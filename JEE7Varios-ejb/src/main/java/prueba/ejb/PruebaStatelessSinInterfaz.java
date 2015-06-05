@@ -16,11 +16,11 @@
 package prueba.ejb;
 
 import javax.ejb.Stateless;
+import javax.interceptor.AroundConstruct;
 import javax.interceptor.Interceptors;
 
 // Ojo, en JEE 7 no necesitamos interfaz para ejb locales, solamente para remotos
 @Stateless
-
 public class PruebaStatelessSinInterfaz {
 
     // ojo un bean Stateless no debe declarar NUNCA una variable de instancia

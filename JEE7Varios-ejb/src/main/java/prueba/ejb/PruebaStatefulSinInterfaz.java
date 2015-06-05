@@ -16,13 +16,16 @@
 package prueba.ejb;
 
 import javax.ejb.Stateful;
-import javax.interceptor.AroundConstruct;
 import javax.interceptor.Interceptors;
 
 @Stateful
 public class PruebaStatefulSinInterfaz {
 
     private float numero = 0;
+    
+    public void setNumero(float numero){
+        this.numero = numero;
+    }
     
     @Interceptors({AroundConstructInterceptor.class})
     public PruebaStatefulSinInterfaz() {

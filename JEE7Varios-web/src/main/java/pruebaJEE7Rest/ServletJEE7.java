@@ -2,6 +2,7 @@ package pruebaJEE7Rest;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,9 +21,15 @@ public class ServletJEE7 extends HttpServlet {
 
     @Inject
     PruebaStatelessSinInterfaz numero;
-    
+
     @Inject
     PruebaStatefulSinInterfaz numero1;
+
+    @PostConstruct
+    public void despuesDeInyectar() {
+        System.out.println("[ServletJEE7][despuesDeInyectar] se llama al metodo despues de realizar la inyeccion de dependencias");
+        numero1.setNumero(500);
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,7 +43,7 @@ public class ServletJEE7 extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        response.setContentType("text/html;charset=UTF-8");
+        response.setContentType("text/html;charset=UTF-8");        
         String parametroRedireccion = request.getParameter("redireccion");
         if (parametroRedireccion != null && parametroRedireccion.equals("true")) {
             request.getRequestDispatcher("prueba2url").forward(request, response);
@@ -48,11 +55,13 @@ public class ServletJEE7 extends HttpServlet {
                 out.println("<head>");
                 out.println("<title>Servlet ServletJEE7</title>");
                 out.println("</head>");
-                out.println("<body>");                
+                out.println("<body>");
+                out.println("-----------------" + request.getSession(true).getId());
+                request.changeSessionId();
                 out.println("<h1>Servlet ServletJEE7 at " + request.getContextPath() + "</h1>");
                 out.println("<p>Primer servlet jee7, bien hecho!!!</p>");
-                out.println("<p>[stateless]El numero devuelto de la inyeccion de dependencias con inject es: " + numero.sumarDiez()+ "</p>");
-                out.println("<p>[stateful]El numero devuelto de la inyeccion de dependencias con inject es: " + numero1.sumarTreinta()+ "</p>");
+                out.println("<p>[stateless]El numero devuelto de la inyeccion de dependencias con inject es: " + numero.sumarDiez() + "</p>");
+                out.println("<p>[stateful]El numero devuelto de la inyeccion de dependencias con inject es: " + numero1.sumarTreinta() + "</p>");
                 out.println("</body>");
                 out.println("</html>");
             }

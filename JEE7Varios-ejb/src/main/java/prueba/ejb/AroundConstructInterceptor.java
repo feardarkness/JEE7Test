@@ -19,7 +19,6 @@ import javax.interceptor.AroundConstruct;
 import javax.interceptor.Interceptor;
 import javax.interceptor.InvocationContext;
 
-@PruebaAroundConstruct
 @Interceptor
 public class AroundConstructInterceptor {
 
@@ -46,7 +45,7 @@ public class AroundConstructInterceptor {
      */
     @AroundConstruct
     public Object validateConstructor(InvocationContext context) throws Exception {
-        System.out.println("[AroundConstructInterceptor][validateConstructor]Interceptor deberia entrar acá");
+        System.out.println("[AroundConstructInterceptor][validateConstructor]Interceptor deberia entrar acá: "+context.getConstructor().getName());
         return context.proceed();
     }
 }
